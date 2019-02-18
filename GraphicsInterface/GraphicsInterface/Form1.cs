@@ -80,19 +80,22 @@ namespace GraphicsInterface
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            Bgr color = new Bgr(100, 40, 243);
+            int xPos = 500;
+            int yPos = 500;
+            float rotation = 55;
 
-            for (int run = 0; run < 1; run++)
-            {
-                for (int j = 0; j < img1.Cols; j++)
-                {
-                    for (int i = 0; i < img1.Rows; i++)
-                    {
-                        img1[i, j] = color;
-                    }
-                }
-            }
-             graphicsOutput.Image = img1.Bitmap;
+            Point p = new Point(xPos, yPos);
+            Size size = new Size(30, 30);  
+            RotatedRect rects = new RotatedRect(p, size, rotation);
+
+
+            img1.Draw(rects, new Bgr(0, 0, 0),-1);
+            
+    
+
+       
+
+            graphicsOutput.Image = img1.Bitmap;
         }
 
         private void button2_Click(object sender, EventArgs e)

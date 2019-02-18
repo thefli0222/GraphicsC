@@ -73,7 +73,7 @@ namespace GraphicsInterface
                     }
 
                     graphicsOutput.Image = img1.Bitmap;
-                    System.Threading.Thread.Sleep(0);
+                    System.Threading.Thread.Sleep(10);
                 }
                 else
                 {

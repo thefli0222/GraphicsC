@@ -32,6 +32,7 @@ namespace GraphicsInterface
             IntPtr image = Emgu.CV.CvInvoke.cvCreateImage(new System.Drawing.Size(400, 300), Emgu.CV.CvEnum.IplDepth.IplDepth_8U, 1);
             
         }
+<<<<<<< HEAD
 
         private void image()
         {
@@ -98,5 +99,7 @@ namespace GraphicsInterface
         {
             thread.Abort();
         }
+=======
+>>>>>>> b2a8bef9e352ec2875b9484a8d486aeea7f817c2
     }
 }

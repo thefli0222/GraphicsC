@@ -27,21 +27,64 @@ namespace GraphicsInterface
         private Data fullData;
         private Entities entities;
         private ArrayList entitiesState;
+        private bool isPlaying = false;
+        private Thread fpsThreadVar;
 
 
         public Form1()
         {
+            InitializeComponent();
             StreamReader sr = File.OpenText("C:/Users/fredr/Documents/GitHub/GraphicsC/GraphicsInterface/GraphicsInterface/output.txt");
             string[] text = sr.ReadToEnd().Split('B');
-
+            fpsThreadVar = new Thread(new ThreadStart(fpsThread));
+            fpsThreadVar.Start();
             entities = new Entities(text[0]);
 
             fullData = new Data(text[1]);
 
             ArrayList entitiesState = entities.getEntities();
 
-            InitializeComponent();
             
+        }
+
+
+        public void fpsThread()
+        {
+            int currentValue = 0;
+            while (true) {
+                if (isPlaying)
+                {
+                    //t.Text = "" + (int.Parse(t.Text) + 1);
+                    currentValue++;
+                    if(currentValue > 7000)
+                    {
+                        currentValue = 0;
+                    }
+                    entities.updateWithTick(fullData.getTickInfo(0, currentValue));
+                    entitiesState = entities.getEntities();
+
+                    foreach (Entity entity in entitiesState)
+                    {
+                        int xPos = (int)entity.PosX;
+                        int yPos = (int)entity.PosY;
+                        float rotation = entity.Rot;
+
+                        Point p = new Point(xPos, yPos);
+                        Size size = new Size(20, 10);
+                        RotatedRect rects = new RotatedRect(p, size, rotation);
+                        img1.Draw(rects, new Bgr(0, 0, 0), -1);
+                    }
+
+                    graphicsOutput.Image = img1.Bitmap;
+                    System.Threading.Thread.Sleep(0);
+                }
+                else
+                {
+                    currentValue = 0;
+                    System.Threading.Thread.Sleep(500);
+                }
+            }
+
         }
 
 
@@ -89,12 +132,13 @@ namespace GraphicsInterface
             graphicsOutput.Image = img1.Bitmap;
         }
 
+
         private void button1_Click_1(object sender, EventArgs e)
         {
 
 
             textBox2.Text = "" + (int.Parse(textBox2.Text) + 1);
-
+            isPlaying = true;
             entities.updateWithTick(fullData.getTickInfo(int.Parse(textBox1.Text), int.Parse(textBox2.Text)));
             entitiesState = entities.getEntities();
 
@@ -107,9 +151,6 @@ namespace GraphicsInterface
                 Size size = new Size(20, 10);
                 RotatedRect rects = new RotatedRect(p, size, rotation);
                 img1.Draw(rects, new Bgr(0, 0, 0), -1);
-
-
-
             }
             /*int xPos = 500;
             int yPos = 500;

@@ -107,6 +107,9 @@ namespace GraphicsInterface
                 Size size = new Size(20, 10);
                 RotatedRect rects = new RotatedRect(p, size, rotation);
                 img1.Draw(rects, new Bgr(0, 0, 0), -1);
+
+
+
             }
             /*int xPos = 500;
             int yPos = 500;
@@ -116,7 +119,7 @@ namespace GraphicsInterface
             Size size = new Size(20, 10);  
             RotatedRect rects = new RotatedRect(p, size, rotation);*/
 
-
+            int x = 5 + 5;
             
     
 

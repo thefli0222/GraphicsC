@@ -12,11 +12,8 @@ using Emgu.CV;
 using System.Threading;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
-
-
-
-
-
+using System.IO;
+using System.Collections;
 
 namespace GraphicsInterface
 {
@@ -27,12 +24,23 @@ namespace GraphicsInterface
         private float posX;
         private float posY;
         private float rot;
+        private Data fullData;
+        private Entities entities;
+        private ArrayList entitiesState;
+
 
         public Form1()
         {
-            
+            StreamReader sr = File.OpenText("C:/Users/fredr/Documents/GitHub/GraphicsC/GraphicsInterface/GraphicsInterface/output.txt");
+            string[] text = sr.ReadToEnd().Split('B');
+
+            entities = new Entities(text[0]);
+
+            fullData = new Data(text[1]);
+
+            ArrayList entitiesState = entities.getEntities();
+
             InitializeComponent();
-            IntPtr image = Emgu.CV.CvInvoke.cvCreateImage(new System.Drawing.Size(400, 300), Emgu.CV.CvEnum.IplDepth.IplDepth_8U, 1);
             
         }
 
@@ -83,15 +91,38 @@ namespace GraphicsInterface
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            int xPos = 500;
+
+            entities.updateWithTick(fullData.getTickInfo(int.Parse(textBox1.Text), int.Parse(textBox2.Text)));
+            entitiesState = entities.getEntities();
+
+            foreach(Entity entity in entitiesState){
+                int xPos = (int)entity.PosX;
+                int yPos = (int)entity.PosX;
+                float rotation = entity.Rot;
+
+                Point p = new Point(xPos, yPos);
+                Size size = new Size(20, 10);
+                RotatedRect rects = new RotatedRect(p, size, rotation);
+                img1.Draw(rects, new Bgr(0, 0, 0), -1);
+            }
+            /*int xPos = 500;
             int yPos = 500;
             float rotation = 55;
 
             Point p = new Point(xPos, yPos);
-            Size size = new Size(30, 30);  
-            RotatedRect rects = new RotatedRect(p, size, rotation);
+            Size size = new Size(20, 10);  
+            RotatedRect rects = new RotatedRect(p, size, rotation);*/
 
+<<<<<<< HEAD
             img1.Draw(rects, new Bgr(0, 0, 0),-1);
+=======
+
+            
+    
+
+       
+
+>>>>>>> 4553213d2036f4f299397fd47a42dd360d47c608
             graphicsOutput.Image = img1.Bitmap;
         }
 

@@ -104,27 +104,7 @@ namespace GraphicsInterface
         [MTAThread]
         static void Main()
         {
-            StreamReader sr = File.OpenText("C:/Users/fredr/Documents/GitHub/GraphicsC/GraphicsInterface/GraphicsInterface/output.txt");
-            string[] text = sr.ReadToEnd().Split('B');
-
-            Entities entities = new Entities(text[0]);
-
-            Data fullData = new Data(text[1]);
-
-            ArrayList entitiesState = entities.getEntities();
-
-            for (int x = 0; x < 100; x++)
-            { 
-                entities.updateWithTick(fullData.getTickInfo(0, x));
-                entitiesState = entities.getEntities();
-                Console.Write("PosX: " + ((Entity)entitiesState[0]).PosX + " PosY: " + ((Entity)entitiesState[0]).PosY + " Rot: " + ((Entity)entitiesState[0]).Rot);
-            }
-
-
-            Console.Write(fullData.getTickInfo(0, 1));
-            Console.Write(fullData.getTickInfo(0, 50));
-            Console.Write(fullData.getTickInfo(0, 100));
-
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());

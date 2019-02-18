@@ -22,6 +22,5 @@ namespace GraphicsInterface
             IntPtr image = Emgu.CV.CvInvoke.cvCreateImage(new System.Drawing.Size(400, 300), Emgu.CV.CvEnum.IplDepth.IplDepth_8U, 1);
             
         }
-
     }
 }

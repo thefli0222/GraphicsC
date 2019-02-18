@@ -105,7 +105,26 @@ namespace GraphicsInterface
                 Size size = new Size(20, 10);
                 RotatedRect rects = new RotatedRect(p, size, rotation);
                 img1.Draw(rects, new Bgr(0, 0, 0), -1);
+
+
+
             }
+<<<<<<< HEAD
+=======
+            /*int xPos = 500;
+            int yPos = 500;
+            float rotation = 55;
+
+            Point p = new Point(xPos, yPos);
+            Size size = new Size(20, 10);  
+            RotatedRect rects = new RotatedRect(p, size, rotation);*/
+
+            int x = 5 + 5;
+            
+    
+
+       
+>>>>>>> 498ce49b263ebd6b4f2ca55f774e76128e6eb654
 
             graphicsOutput.Image = img1.Bitmap;
         }

@@ -85,19 +85,22 @@ namespace GraphicsInterface
         private void graphicsOutput_Click(object sender, EventArgs e)
         {
 
-            img1 = new Image<Bgr, Byte>(900, 900, new Bgr(255, 255, 255));
+            img1 = new Image<Bgr, Byte>(1000, 900, new Bgr(255, 255, 255));
             graphicsOutput.Image = img1.Bitmap;
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
 
+
+            textBox2.Text = "" + (int.Parse(textBox2.Text) + 1);
+
             entities.updateWithTick(fullData.getTickInfo(int.Parse(textBox1.Text), int.Parse(textBox2.Text)));
             entitiesState = entities.getEntities();
 
             foreach(Entity entity in entitiesState){
                 int xPos = (int)entity.PosX;
-                int yPos = (int)entity.PosX;
+                int yPos = (int)entity.PosY;
                 float rotation = entity.Rot;
 
                 Point p = new Point(xPos, yPos);

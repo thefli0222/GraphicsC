@@ -91,13 +91,7 @@ namespace GraphicsInterface
             Size size = new Size(30, 30);  
             RotatedRect rects = new RotatedRect(p, size, rotation);
 
-
             img1.Draw(rects, new Bgr(0, 0, 0),-1);
-            
-    
-
-       
-
             graphicsOutput.Image = img1.Bitmap;
         }
 

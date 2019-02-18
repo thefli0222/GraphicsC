@@ -31,7 +31,7 @@ namespace GraphicsInterface
         public Form1()
         {
             InitializeComponent();
-            StreamReader sr = File.OpenText("C:/Users/fredr/Documents/GitHub/GraphicsC/GraphicsInterface/GraphicsInterface/output.txt");
+            StreamReader sr = File.OpenText("C:/Users/Johannes/Desktop/AI proj/GraphicsC/GraphicsInterface/GraphicsInterface/output.txt");
             string[] text = sr.ReadToEnd().Split('B');
             fpsThreadVar = new Thread(new ThreadStart(fpsThread));
             fpsThreadVar.Start();
@@ -40,8 +40,9 @@ namespace GraphicsInterface
             fullData = new Data(text[1]);
 
             ArrayList entitiesState = entities.getEntities();
+            img1 = new Image<Bgr, Byte>(1000, 900, new Bgr(255, 255, 255));
+            graphicsOutput.Image = img1.Bitmap;
 
-            
         }
 
 
@@ -51,6 +52,7 @@ namespace GraphicsInterface
             while (true) {
                 if (isPlaying)
                 {
+                    img1 = new Image<Bgr, Byte>(1000, 900, new Bgr(255, 255, 255));
                     //t.Text = "" + (int.Parse(t.Text) + 1);
                     currentValue++;
                     if(currentValue > 7000)

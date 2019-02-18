@@ -56,6 +56,7 @@
             this.graphicsOutput.Size = new System.Drawing.Size(1000, 900);
             this.graphicsOutput.TabIndex = 0;
             this.graphicsOutput.TabStop = false;
+            this.graphicsOutput.Click += new System.EventHandler(this.graphicsOutput_Click);
             // 
             // button1
             // 
@@ -65,6 +66,7 @@
             this.button1.TabIndex = 1;
             this.button1.Text = "Play";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // button2
             // 
@@ -74,6 +76,7 @@
             this.button2.TabIndex = 2;
             this.button2.Text = "Pause";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 

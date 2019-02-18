@@ -21,9 +21,6 @@ namespace GraphicsInterface
     {
 
         Thread thread;
-        private float posX;
-        private float posY;
-        private float rot;
         private Data fullData;
         private Entities entities;
         private ArrayList entitiesState;
@@ -105,24 +102,7 @@ namespace GraphicsInterface
                 RotatedRect rects = new RotatedRect(p, size, rotation);
                 img1.Draw(rects, new Bgr(0, 0, 0), -1);
             }
-            /*int xPos = 500;
-            int yPos = 500;
-            float rotation = 55;
 
-            Point p = new Point(xPos, yPos);
-            Size size = new Size(20, 10);  
-            RotatedRect rects = new RotatedRect(p, size, rotation);*/
-
-<<<<<<< HEAD
-            img1.Draw(rects, new Bgr(0, 0, 0),-1);
-=======
-
-            
-    
-
-       
-
->>>>>>> 4553213d2036f4f299397fd47a42dd360d47c608
             graphicsOutput.Image = img1.Bitmap;
         }
 

@@ -27,18 +27,24 @@ namespace GraphicsInterface
         private bool isPlaying = false;
         private Thread fpsThreadVar;
         private int width, height;
+        private int centerX, centerY;
+        private int centerIndex;
 
 
         public Form1()
         {
             width = 1000;
             height = 900;
+            centerX = 0;
+            centerY = 0;
             InitializeComponent();
-            StreamReader sr = File.OpenText("C:/Users/Johannes/Desktop/AI proj/GraphicsC/GraphicsInterface/GraphicsInterface/output.txt");
+            StreamReader sr = File.OpenText("C:/Users/fredr/Documents/GitHub/GraphicsC/GraphicsInterface/GraphicsInterface/output.txt");
             string[] text = sr.ReadToEnd().Split('B');
             fpsThreadVar = new Thread(new ThreadStart(fpsThread));
             fpsThreadVar.Start();
             entities = new Entities(text[0]);
+            centerIndex = -1;
+
 
             fullData = new Data(text[1]);
 
@@ -68,6 +74,15 @@ namespace GraphicsInterface
             while (true) {
                 if (isPlaying)
                 {
+
+
+                    if(centerIndex >= 0)
+                    {
+                        centerX = (int)(((Entity)entitiesState[centerIndex]).PosX);
+                        centerY = (int)(((Entity)entitiesState[centerIndex]).PosY);
+                    }
+
+
                     img1 = new Image<Bgr, Byte>(width, height, new Bgr(255, 255, 255));
                     //t.Text = "" + (int.Parse(t.Text) + 1);
                     currentValue++;
@@ -80,8 +95,8 @@ namespace GraphicsInterface
 
                     foreach (Entity entity in entitiesState)
                     {
-                        int xPos = (int)entity.PosX;
-                        int yPos = (int)entity.PosY;
+                        int xPos = width/2 + (int)entity.PosX - centerX;
+                        int yPos = height/2 + (int)entity.PosY - centerY;
                         float rotation = entity.Rot;
 
                         Point p = new Point(xPos, yPos);
@@ -147,11 +162,19 @@ namespace GraphicsInterface
 
         private void EntitySelected_SelectedIndexChanged(object sender, EventArgs e)
         {
-            thread = new Thread(new ThreadStart(reseize));
-            thread.Start(); 
+            /*thread = new Thread(new ThreadStart(reseize));
+            thread.Start();*/
+
+            string text = EntitySelected.GetItemText(EntitySelected.SelectedItem);
+
+            centerIndex = int.Parse(text) - 1;
+
+            centerX = (int)(((Entity)entitiesState[int.Parse(text) - 1]).PosX);
+            centerY = (int)(((Entity)entitiesState[int.Parse(text) - 1]).PosY);
+
         }
 
-        private void reseize()
+        /*private void reseize()
         {
             while (isPlaying)
             {
@@ -182,7 +205,7 @@ namespace GraphicsInterface
 
             }
 
-        }
+        }*/
 
     }
 }

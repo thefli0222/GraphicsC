@@ -41,6 +41,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.EntitySelected = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.graphicsOutput)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -94,7 +95,7 @@
             this.panel1.Controls.Add(this.button2);
             this.panel1.Location = new System.Drawing.Point(3, 65);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(414, 49);
+            this.panel1.Size = new System.Drawing.Size(414, 45);
             this.panel1.TabIndex = 4;
             // 
             // textBox1
@@ -152,12 +153,13 @@
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.EntitySelected);
             this.panel4.Controls.Add(this.panel2);
             this.panel4.Controls.Add(this.panel3);
             this.panel4.Controls.Add(this.panel1);
             this.panel4.Location = new System.Drawing.Point(1040, 361);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(433, 123);
+            this.panel4.Size = new System.Drawing.Size(433, 548);
             this.panel4.TabIndex = 7;
             // 
             // panel5
@@ -167,6 +169,15 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(432, 336);
             this.panel5.TabIndex = 8;
+            // 
+            // EntitySelected
+            // 
+            this.EntitySelected.FormattingEnabled = true;
+            this.EntitySelected.Location = new System.Drawing.Point(3, 116);
+            this.EntitySelected.Name = "EntitySelected";
+            this.EntitySelected.Size = new System.Drawing.Size(154, 160);
+            this.EntitySelected.TabIndex = 7;
+            this.EntitySelected.SelectedIndexChanged += new System.EventHandler(this.EntitySelected_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -204,6 +215,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.ListBox EntitySelected;
     }
 }
 

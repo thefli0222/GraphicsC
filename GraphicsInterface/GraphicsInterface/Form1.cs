@@ -26,10 +26,13 @@ namespace GraphicsInterface
         private ArrayList entitiesState;
         private bool isPlaying = false;
         private Thread fpsThreadVar;
+        private int width, height;
 
 
         public Form1()
         {
+            width = 1000;
+            height = 900;
             InitializeComponent();
             StreamReader sr = File.OpenText("C:/Users/Johannes/Desktop/AI proj/GraphicsC/GraphicsInterface/GraphicsInterface/output.txt");
             string[] text = sr.ReadToEnd().Split('B');
@@ -43,6 +46,19 @@ namespace GraphicsInterface
             img1 = new Image<Bgr, Byte>(1000, 900, new Bgr(255, 255, 255));
             graphicsOutput.Image = img1.Bitmap;
 
+            List<int> indexList = new List<int>();
+            foreach (Entity entity in entitiesState)
+            {
+                indexList.Add((int)entity.Index);
+            }
+
+            foreach(int item in indexList)
+            {
+                EntitySelected.Items.Add(item);
+            }
+           
+
+
         }
 
 
@@ -52,7 +68,7 @@ namespace GraphicsInterface
             while (true) {
                 if (isPlaying)
                 {
-                    img1 = new Image<Bgr, Byte>(1000, 900, new Bgr(255, 255, 255));
+                    img1 = new Image<Bgr, Byte>(width, height, new Bgr(255, 255, 255));
                     //t.Text = "" + (int.Parse(t.Text) + 1);
                     currentValue++;
                     if(currentValue > 7000)
@@ -86,43 +102,6 @@ namespace GraphicsInterface
 
         }
 
-
-        private void image()
-        {
-            int width = 640, height = 320;
-            Bitmap bmp = new Bitmap(width, height);
-
-            Random rand = new Random();
-            for (int y = 0; y < height; y++)
-            {
-                for (int x = 0; x < width; x++)
-                {
-                    int a = rand.Next(256);
-                    int r = rand.Next(256);
-                    int g = rand.Next(256);
-                    int b = rand.Next(256);
-
-                    bmp.SetPixel(x, y, Color.FromArgb(a, r, g, b));
-                }
-            }
-            graphicsOutput.Image = bmp;
-        }
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            image();
-        }
-
-        private void WorkThreadFunction()
-        {
-            try
-            {
-                for (int i = 0; i < 100; i++)
-                    image();
-            }
-            catch
-            {
-            }
-        }
         Image<Bgr, Byte> img1;
         private void graphicsOutput_Click(object sender, EventArgs e)
         {
@@ -158,7 +137,51 @@ namespace GraphicsInterface
 
         private void button2_Click(object sender, EventArgs e)
         {
-            thread.Abort();
+            isPlaying = false;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EntitySelected_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            thread = new Thread(new ThreadStart(reseize));
+            thread.Start(); 
+        }
+
+        private void reseize()
+        {
+            while (isPlaying)
+            {
+                string text = "";
+                this.Invoke((MethodInvoker)delegate ()
+                {
+                    text = EntitySelected.GetItemText(EntitySelected.SelectedItem);
+                });
+                
+                foreach (Entity entity in entitiesState)
+                {
+                    if (entity.Index == Int32.Parse(text))
+                    {
+                     
+                        int y = (1000 / 2) + (int)entity.PosY/2 ;
+                        int x = (900 / 2) + (int)entity.PosX/2   ;
+                        width = y;
+                        height = x;
+
+
+                        graphicsOutput.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+                      
+
+
+                    }
+                }
+
+
+            }
+
         }
 
     }

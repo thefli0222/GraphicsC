@@ -35,10 +35,10 @@ namespace GraphicsInterface
         {
             width = 1000;
             height = 900;
-            centerX = 0;
-            centerY = 0;
+            centerX = width/2;
+            centerY = height/2;
             InitializeComponent();
-            StreamReader sr = File.OpenText("C:/Users/fredr/Documents/GitHub/GraphicsC/GraphicsInterface/GraphicsInterface/output.txt");
+            StreamReader sr = File.OpenText("C:/Users/Johannes/Desktop/AI proj/GraphicsC/GraphicsInterface/GraphicsInterface/output.txt");
             string[] text = sr.ReadToEnd().Split('B');
             fpsThreadVar = new Thread(new ThreadStart(fpsThread));
             fpsThreadVar.Start();
@@ -80,6 +80,11 @@ namespace GraphicsInterface
                     {
                         centerX = (int)(((Entity)entitiesState[centerIndex]).PosX);
                         centerY = (int)(((Entity)entitiesState[centerIndex]).PosY);
+                    }
+                    else
+                    {
+                        centerX = width / 2;
+                        centerY = height / 2;
                     }
 
 
@@ -154,58 +159,28 @@ namespace GraphicsInterface
         {
             isPlaying = false;
         }
-
-        private void button4_Click(object sender, EventArgs e)
+  
+        private void button4_Click_1(object sender, EventArgs e)
         {
-
+            EntitySelected.SelectedIndex = -1;
         }
 
         private void EntitySelected_SelectedIndexChanged(object sender, EventArgs e)
         {
-            /*thread = new Thread(new ThreadStart(reseize));
-            thread.Start();*/
-
+        
             string text = EntitySelected.GetItemText(EntitySelected.SelectedItem);
+         
+            if(!text.Equals("")){
+                centerIndex = int.Parse(text) - 1;
 
-            centerIndex = int.Parse(text) - 1;
-
-            centerX = (int)(((Entity)entitiesState[int.Parse(text) - 1]).PosX);
-            centerY = (int)(((Entity)entitiesState[int.Parse(text) - 1]).PosY);
+           
+            }
+            else
+            {
+                centerIndex = -1;
+            }
+           
 
         }
-
-        /*private void reseize()
-        {
-            while (isPlaying)
-            {
-                string text = "";
-                this.Invoke((MethodInvoker)delegate ()
-                {
-                    text = EntitySelected.GetItemText(EntitySelected.SelectedItem);
-                });
-                
-                foreach (Entity entity in entitiesState)
-                {
-                    if (entity.Index == Int32.Parse(text))
-                    {
-                     
-                        int y = (1000 / 2) + (int)entity.PosY/2 ;
-                        int x = (900 / 2) + (int)entity.PosX/2   ;
-                        width = y;
-                        height = x;
-
-
-                        graphicsOutput.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-                      
-
-
-                    }
-                }
-
-
-            }
-
-        }*/
-
     }
 }

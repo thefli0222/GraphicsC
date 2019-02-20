@@ -40,9 +40,9 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.button4 = new System.Windows.Forms.Button();
             this.EntitySelected = new System.Windows.Forms.ListBox();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.graphicsOutput)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -88,6 +88,7 @@
             this.button3.TabIndex = 3;
             this.button3.Text = "Jump";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // panel1
             // 
@@ -106,6 +107,7 @@
             this.textBox1.Size = new System.Drawing.Size(297, 20);
             this.textBox1.TabIndex = 5;
             this.textBox1.Text = "0";
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label1
             // 
@@ -141,6 +143,7 @@
             this.textBox2.Size = new System.Drawing.Size(297, 20);
             this.textBox2.TabIndex = 5;
             this.textBox2.Text = "0";
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label2
             // 
@@ -164,6 +167,16 @@
             this.panel4.Size = new System.Drawing.Size(433, 548);
             this.panel4.TabIndex = 7;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(163, 116);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(105, 39);
+            this.button4.TabIndex = 8;
+            this.button4.Text = "Unselect";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click_1);
+            // 
             // EntitySelected
             // 
             this.EntitySelected.FormattingEnabled = true;
@@ -180,16 +193,6 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(432, 336);
             this.panel5.TabIndex = 8;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(163, 116);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(105, 39);
-            this.button4.TabIndex = 8;
-            this.button4.Text = "Unselect";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click_1);
             // 
             // Form1
             // 

@@ -41,7 +41,7 @@ namespace GraphicsInterface
             centerX = width/2;
             centerY = height/2;
             InitializeComponent();
-            StreamReader sr = File.OpenText("C:/Users/Johannes/Desktop/AI proj/DIT411/notgrid/gridless/output.txt");
+            StreamReader sr = File.OpenText("C:/Users/fredr/Documents/GitHub/GraphicsC/GraphicsInterface/GraphicsInterface/output.txt");
             //C:/Users/fredr/Documents/GitHub/GraphicsC/GraphicsInterface/GraphicsInterface
             string[] text = sr.ReadToEnd().Split('B');
 
@@ -92,6 +92,26 @@ namespace GraphicsInterface
 
                     if (currentValue > 7000)
                         currentValue = 0;
+
+                    if(currentValue > 0)
+                    {
+                        entities.updateWithTick(fullData.getTickInfo(0, currentValue-1));
+                        entitiesState = entities.getEntities();
+
+                        foreach (Entity entity in entitiesState)
+                        {
+                            int xPos = width / 2 + (int)entity.PosX - centerX;
+                            int yPos = height / 2 + (int)entity.PosY - centerY;
+                            float rotation = entity.Rot;
+
+                            Point p = new Point(xPos, yPos);
+                            Size size = new Size(20, 10);
+                            RotatedRect rects = new RotatedRect(p, size, rotation);
+                            img1.Draw(rects, new Bgr(255, 255, 255), -1);
+
+                        }
+                    }
+
                
                     entities.updateWithTick(fullData.getTickInfo(0, currentValue));
                     entitiesState = entities.getEntities();
@@ -109,7 +129,7 @@ namespace GraphicsInterface
                         
                     }
                     graphicsOutput.Image = img1.Bitmap;
-                    System.Threading.Thread.Sleep(0);
+                    System.Threading.Thread.Sleep(10);
                 }
                 else
                 {

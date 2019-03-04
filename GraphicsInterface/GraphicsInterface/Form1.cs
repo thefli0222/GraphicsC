@@ -17,6 +17,7 @@ using System.Collections;
 
 namespace GraphicsInterface
 {
+    public enum AnimalNames {Wolf, Sheep};
     public partial class Form1 : Form
     {
         private Data fullData;
@@ -32,6 +33,7 @@ namespace GraphicsInterface
         private int value;
      
 
+
         public Form1()
         {
             width = 1000;
@@ -39,7 +41,8 @@ namespace GraphicsInterface
             centerX = width/2;
             centerY = height/2;
             InitializeComponent();
-            StreamReader sr = File.OpenText("C:/Users/Johannes/Desktop/AI proj/GraphicsC/GraphicsInterface/GraphicsInterface/output.txt");
+            StreamReader sr = File.OpenText("C:/Users/Johannes/Desktop/AI proj/DIT411/notgrid/gridless/output.txt");
+            //C:/Users/fredr/Documents/GitHub/GraphicsC/GraphicsInterface/GraphicsInterface
             string[] text = sr.ReadToEnd().Split('B');
 
             fpsThreadVar = new Thread(new ThreadStart(fpsThread));
@@ -55,12 +58,11 @@ namespace GraphicsInterface
             foreach (Entity entity in entitiesState)
             {
                 indexList.Add((int)entity.Index);
+
             }
-       
-            foreach (int item in indexList)
-            {
-                EntitySelected.Items.Add(item);
-            }
+      
+            foreach(int item in indexList)
+                EntitySelected.Items.Add(item + ": " + Enum.GetName(typeof(AnimalNames), (((Entity)entitiesState[(item - 1)]).Animal) - 1));
 
         }
 
@@ -105,7 +107,7 @@ namespace GraphicsInterface
                         img1.Draw(rects, new Bgr(0, 0, 0), -1);
                     }
                     graphicsOutput.Image = img1.Bitmap;
-                    System.Threading.Thread.Sleep(1);
+                    System.Threading.Thread.Sleep(0);
                 }
                 else
                 {
@@ -132,7 +134,14 @@ namespace GraphicsInterface
             isPlaying = true;
         }
 
-  
+        private void tickUpdate(int value)
+        {
+                this.Invoke((MethodInvoker)delegate ()
+                {
+                    textBox2.Text = "" + value.ToString();
+                });
+        }
+
 
         private void button2_Click(object sender, EventArgs e)
         {

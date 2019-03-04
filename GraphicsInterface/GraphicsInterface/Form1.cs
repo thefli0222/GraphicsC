@@ -41,7 +41,7 @@ namespace GraphicsInterface
             centerX = width/2;
             centerY = height/2;
             InitializeComponent();
-            StreamReader sr = File.OpenText("C:/Users/fredr/Documents/GitHub/GraphicsC/GraphicsInterface/GraphicsInterface/output.txt");
+            StreamReader sr = File.OpenText("C:/Users/Johannes/Desktop/AI proj/DIT411/notgrid/gridless/output.txt");
             //C:/Users/fredr/Documents/GitHub/GraphicsC/GraphicsInterface/GraphicsInterface
             string[] text = sr.ReadToEnd().Split('B');
 
@@ -85,34 +85,20 @@ namespace GraphicsInterface
                         centerY = height / 2;
                     }
 
-                  
+           
 
-                    currentValue++;
+                      currentValue++;
                     value = currentValue;
 
                     if (currentValue > 7000)
                         currentValue = 0;
 
-                    if(currentValue > 0)
-                    {
-                        entities.updateWithTick(fullData.getTickInfo(0, currentValue-1));
-                        entitiesState = entities.getEntities();
+                    Point p = new Point(0, 0);
+                    Size size = new Size(2000, 2000);
+                    RotatedRect rects = new RotatedRect(p, size, 0);
+                    img1.Draw(rects, new Bgr(255, 255, 255), -1);
+                    
 
-                        foreach (Entity entity in entitiesState)
-                        {
-                            int xPos = width / 2 + (int)entity.PosX - centerX;
-                            int yPos = height / 2 + (int)entity.PosY - centerY;
-                            float rotation = entity.Rot;
-
-                            Point p = new Point(xPos, yPos);
-                            Size size = new Size(20, 10);
-                            RotatedRect rects = new RotatedRect(p, size, rotation);
-                            img1.Draw(rects, new Bgr(255, 255, 255), -1);
-
-                        }
-                    }
-
-               
                     entities.updateWithTick(fullData.getTickInfo(0, currentValue));
                     entitiesState = entities.getEntities();
 
@@ -122,14 +108,14 @@ namespace GraphicsInterface
                         int yPos = height/2 + (int)entity.PosY - centerY;
                         float rotation = entity.Rot;
 
-                        Point p = new Point(xPos, yPos);
-                        Size size = new Size(20, 10);
-                        RotatedRect rects = new RotatedRect(p, size, rotation);
+                        p = new Point(xPos, yPos);
+                        size = new Size(20, 10);
+                        rects = new RotatedRect(p, size, rotation);
                         img1.Draw(rects, new Bgr(0, 0, 0), -1);
                         
                     }
                     graphicsOutput.Image = img1.Bitmap;
-                    System.Threading.Thread.Sleep(10);
+                    System.Threading.Thread.Sleep(2);
                 }
                 else
                 {

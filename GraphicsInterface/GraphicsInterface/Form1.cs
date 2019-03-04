@@ -113,9 +113,13 @@ namespace GraphicsInterface
                         Size size = new Size(20, 10);
                         RotatedRect rects = new RotatedRect(p, size, rotation);
                         img1.Draw(rects, new Bgr(0, 0, 0), -1);
+                        
                     }
                     graphicsOutput.Image = img1.Bitmap;
-                    System.Threading.Thread.Sleep(0);
+                    System.Threading.Thread.Sleep(10);
+
+                   
+
                 }
                 else
                 {
@@ -230,7 +234,7 @@ namespace GraphicsInterface
         {
             string text = EntitySelected.GetItemText(EntitySelected.SelectedItem);
             if(!text.Equals(""))
-                centerIndex = int.Parse(text) - 1;
+                centerIndex = int.Parse(text.Split(':')[0]) - 1;
             else
                 centerIndex = -1;  
         }

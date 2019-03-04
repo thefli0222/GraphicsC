@@ -45,6 +45,7 @@ namespace GraphicsInterface
             //C:/Users/fredr/Documents/GitHub/GraphicsC/GraphicsInterface/GraphicsInterface
             string[] text = sr.ReadToEnd().Split('B');
 
+            img1 = new Image<Bgr, Byte>(width, height, new Bgr(255, 255, 255));
             fpsThreadVar = new Thread(new ThreadStart(fpsThread));
             fpsThreadVar.Start();
 
@@ -70,7 +71,7 @@ namespace GraphicsInterface
         public void fpsThread()
         {
             while (true) {
-   
+
                 if (isPlaying)
                 {
                     if(centerIndex >= 0)
@@ -84,7 +85,7 @@ namespace GraphicsInterface
                         centerY = height / 2;
                     }
 
-                    img1 = new Image<Bgr, Byte>(width, height, new Bgr(255, 255, 255));
+                  
 
                     currentValue++;
                     value = currentValue;
@@ -109,9 +110,6 @@ namespace GraphicsInterface
                     }
                     graphicsOutput.Image = img1.Bitmap;
                     System.Threading.Thread.Sleep(0);
-
-                   
-
                 }
                 else
                 {
@@ -130,20 +128,15 @@ namespace GraphicsInterface
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-   
             string theText = textBox2.Text;
             value = Int32.Parse(theText);
             currentValue = value;
-
             isPlaying = true;
         }
 
         private void tickUpdate(int value)
         {
-                this.Invoke((MethodInvoker)delegate ()
-                {
-                    textBox2.Text = "" + value.ToString();
-                });
+               textBox2.Text = "" + value.ToString();
         }
 
 

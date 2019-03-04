@@ -108,7 +108,7 @@ namespace GraphicsInterface
                         
                     }
                     graphicsOutput.Image = img1.Bitmap;
-                    System.Threading.Thread.Sleep(10);
+                    System.Threading.Thread.Sleep(0);
 
                    
 

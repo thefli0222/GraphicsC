@@ -41,7 +41,7 @@ namespace GraphicsInterface
             centerX = width/2;
             centerY = height/2;
             InitializeComponent();
-            StreamReader sr = File.OpenText("C:/Users/Johannes/Desktop/AI proj/DIT411/notgrid/gridless/output.txt");
+            StreamReader sr = File.OpenText("C:/Users/fredr/Documents/GitHub/GraphicsC/GraphicsInterface/GraphicsInterface/output.txt");
             //C:/Users/fredr/Documents/GitHub/GraphicsC/GraphicsInterface/GraphicsInterface
             string[] text = sr.ReadToEnd().Split('B');
 
@@ -115,7 +115,7 @@ namespace GraphicsInterface
                         
                     }
                     graphicsOutput.Image = img1.Bitmap;
-                    System.Threading.Thread.Sleep(2);
+                    System.Threading.Thread.Sleep(10);
                 }
                 else
                 {

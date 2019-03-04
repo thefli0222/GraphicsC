@@ -45,7 +45,7 @@ namespace GraphicsInterface
             //C:/Users/fredr/Documents/GitHub/GraphicsC/GraphicsInterface/GraphicsInterface
             string[] text = sr.ReadToEnd().Split('B');
 
-            img1 = new Image<Bgr, Byte>(width, height, new Bgr(255, 255, 255));
+            img1 = new Image<Bgr, Byte>(width, height, new Bgr(170, 225, 102));
             fpsThreadVar = new Thread(new ThreadStart(fpsThread));
             fpsThreadVar.Start();
 
@@ -96,7 +96,7 @@ namespace GraphicsInterface
                     Point p = new Point(0, 0);
                     Size size = new Size(2000, 2000);
                     RotatedRect rects = new RotatedRect(p, size, 0);
-                    img1.Draw(rects, new Bgr(255, 255, 255), -1);
+                    img1.Draw(rects, new Bgr(170, 225, 102), -1);
 
 
                     
@@ -121,7 +121,7 @@ namespace GraphicsInterface
                             Point end = new Point((int)line.EndX, (int)line.EndY);
                             t[0] = start;
                             t[1] = end;
-                            Bgr c = new Bgr(0, 0, 0);
+                            Bgr c = new Bgr(255-34, 255 - 34, 255 - 34);
 
                             foreach (Entity otherEntity in entitiesState)
                             {
@@ -157,7 +157,7 @@ namespace GraphicsInterface
 
 
                     graphicsOutput.Image = img1.Bitmap;
-                    System.Threading.Thread.Sleep(20);
+                    System.Threading.Thread.Sleep(15);
                 }
                 else
                 {

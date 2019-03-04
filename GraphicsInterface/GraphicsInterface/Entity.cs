@@ -68,9 +68,20 @@ namespace GraphicsInterface
                 //posValues[0] = posValues[0].Replace('.', ',');
                 //posValues[1] = posValues[1].Replace('.', ',');
                 //changeValues[2] = changeValues[2].Replace('.', ',');
-                PosX = float.Parse(posValues[0]);
-                PosY = float.Parse(posValues[1]);
-                Rot = float.Parse(changeValues[2]);
+                try
+                {
+                    PosX = float.Parse(posValues[0]);
+                    PosY = float.Parse(posValues[1]);
+                    Rot = float.Parse(changeValues[2]);
+                } catch
+                {
+                    posValues[0] = posValues[0].Replace('.', ',');
+                    posValues[1] = posValues[1].Replace('.', ',');
+                    changeValues[2] = changeValues[2].Replace('.', ',');
+                    PosX = float.Parse(posValues[0]);
+                    PosY = float.Parse(posValues[1]);
+                    Rot = float.Parse(changeValues[2]);
+                }
             }
         }
         

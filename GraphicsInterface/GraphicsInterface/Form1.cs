@@ -17,6 +17,7 @@ using System.Collections;
 
 namespace GraphicsInterface
 {
+    public enum AnimalNames {Wolf, Sheep};
     public partial class Form1 : Form
     {
         private Thread t;
@@ -30,6 +31,7 @@ namespace GraphicsInterface
         private int centerIndex;
         private Image<Bgr, Byte> img1;
         private int currentValue;
+        
 
 
         public Form1()
@@ -39,7 +41,8 @@ namespace GraphicsInterface
             centerX = width/2;
             centerY = height/2;
             InitializeComponent();
-            StreamReader sr = File.OpenText("C:/Users/Johannes/Desktop/AI proj/GraphicsC/GraphicsInterface/GraphicsInterface/output.txt");
+            StreamReader sr = File.OpenText("C:/Users/fredr/Documents/GitHub/GraphicsC/GraphicsInterface/GraphicsInterface/output.txt");
+            //C:/Users/fredr/Documents/GitHub/GraphicsC/GraphicsInterface/GraphicsInterface
             string[] text = sr.ReadToEnd().Split('B');
             //fpsThreadVar = new Thread(new ThreadStart(fpsThread));
 
@@ -59,7 +62,7 @@ namespace GraphicsInterface
                 indexList.Add((int)entity.Index);
 
             foreach(int item in indexList)
-                EntitySelected.Items.Add(item);
+                EntitySelected.Items.Add(item + ": " + Enum.GetName(typeof(AnimalNames), (((Entity)entitiesState[(item - 1)]).Animal) - 1));
             
         }
 
@@ -112,7 +115,7 @@ namespace GraphicsInterface
                         img1.Draw(rects, new Bgr(0, 0, 0), -1);
                     }
                     graphicsOutput.Image = img1.Bitmap;
-                    System.Threading.Thread.Sleep(10);
+                    System.Threading.Thread.Sleep(0);
                 }
                 else
                 {
@@ -171,7 +174,7 @@ namespace GraphicsInterface
         {
                 this.Invoke((MethodInvoker)delegate ()
                 {
-                textBox2.Text = "" + value.ToString();
+                    textBox2.Text = "" + value.ToString();
                 });
         }
 

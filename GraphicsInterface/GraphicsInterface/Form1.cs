@@ -87,7 +87,7 @@ namespace GraphicsInterface
 
            
 
-                      currentValue++;
+                    currentValue++;
                     value = currentValue;
 
                     if (currentValue > 7000)
@@ -97,6 +97,8 @@ namespace GraphicsInterface
                     Size size = new Size(2000, 2000);
                     RotatedRect rects = new RotatedRect(p, size, 0);
                     img1.Draw(rects, new Bgr(255, 255, 255), -1);
+
+
                     
 
                     entities.updateWithTick(fullData.getTickInfo(0, currentValue));
@@ -109,13 +111,53 @@ namespace GraphicsInterface
                         float rotation = entity.Rot;
 
                         p = new Point(xPos, yPos);
+
+                        double[] pos = { xPos, yPos };
+
+
+                        foreach(LineData line in LineCalc.createLines(27, 200, 270, -entity.Rot-90, pos)){
+                            Point[] t = new Point[2];
+                            Point start = new Point((int)line.StartX, (int)line.StartY);
+                            Point end = new Point((int)line.EndX, (int)line.EndY);
+                            t[0] = start;
+                            t[1] = end;
+                            Bgr c = new Bgr(0, 0, 0);
+
+                            foreach (Entity otherEntity in entitiesState)
+                            {
+                                if(otherEntity.Index != entity.Index)
+                                {
+                                    int OxPos = width / 2 + (int)otherEntity.PosX - centerX;
+                                    int OyPos = height / 2 + (int)otherEntity.PosY - centerY;
+                                    double[] objPos = { OxPos, OyPos };
+                                    double[] lineStart = { line.StartX, line.StartY };
+                                    double[] lineEnd = { line.EndX, line.EndY };
+                                    double disToObj= LineCalc.distanceToObject(30, objPos, lineStart, lineEnd);
+                                    if (disToObj >= 0)
+                                    {
+                                        c = new Bgr(255, 0, 0);
+                                    }
+                                }
+                            }
+                            img1.DrawPolyline(t, false, c, 1);
+                        }
+                        
+
                         size = new Size(20, 10);
                         rects = new RotatedRect(p, size, rotation);
+
+
+
                         img1.Draw(rects, new Bgr(0, 0, 0), -1);
+
+
+
                         
                     }
+
+
                     graphicsOutput.Image = img1.Bitmap;
-                    System.Threading.Thread.Sleep(10);
+                    System.Threading.Thread.Sleep(20);
                 }
                 else
                 {

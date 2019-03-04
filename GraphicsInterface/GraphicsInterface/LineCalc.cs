@@ -116,7 +116,9 @@ namespace GraphicsInterface
         ArrayList wallLines;
         double visionLength;
 
-        public double distanceToObject(double radius, double[] objPos, double[] line1, double[] line2)
+
+
+        public static double distanceToObject(double radius, double[] objPos, double[] line1, double[] line2)
         {
             NDArray x = np.array(objPos);
 
@@ -126,10 +128,12 @@ namespace GraphicsInterface
 
             NDArray n = v - u;
             NDArray g = new NDArray(n);
-            g.normalize();
-            n /= g;
 
-            NDArray intersectPos = u + n * np.dot(x - u, n);
+            n /= 200;
+
+            NDArray s = x - u;
+            double dot = (double)s[0] * (double)n[0] + (double)s[1] * (double)n[1];
+            NDArray intersectPos = u + n*dot;
 
             double distanceLineToObject = Math.Sqrt(Math.Pow(((double)intersectPos[0] - objPos[0]), 2) + Math.Pow(((double)intersectPos[1] - objPos[1]), 2));
 
@@ -156,7 +160,7 @@ namespace GraphicsInterface
 
         }
 
-        public ArrayList createLines(int nLines, double lineLength, double fieldOfView, double startAngle, double[] orgin) {
+        public static ArrayList createLines(int nLines, double lineLength, double fieldOfView, double startAngle, double[] orgin) {
             double startX = orgin[0];
             double startY = orgin[1];
 
@@ -172,8 +176,8 @@ namespace GraphicsInterface
             {
                 double angle = linesStartAtAngle + lineIndex * degreesPerLine;
 
-                double stopX = startX + Math.Sin(angle) * lineLength;
-                double stopY = startY + Math.Cos(angle) * lineLength;
+                double stopX = startX + Math.Sin((Math.PI * angle / 180)) * lineLength;
+                double stopY = startY + Math.Cos((Math.PI * angle / 180)) * lineLength;
 
                 lines.Add(new LineData(startX, startY, stopX, stopY));
             }

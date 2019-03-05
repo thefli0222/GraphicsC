@@ -113,46 +113,62 @@ namespace GraphicsInterface
                         p = new Point(xPos, yPos);
 
                         double[] pos = { xPos, yPos };
+                        bool someLines = false;
 
 
-                        foreach(LineData line in LineCalc.createLines(27, 200, 270, -entity.Rot-90, pos)){
-                            Point[] t = new Point[2];
-                            Point start = new Point((int)line.StartX, (int)line.StartY);
-                            Point end = new Point((int)line.EndX, (int)line.EndY);
-                            t[0] = start;
-                            t[1] = end;
-                            Bgr c = new Bgr(255-34, 255 - 34, 255 - 34);
+                        if (ShowAllLines.Checked || ShowHittingLines.Checked) {
+                            foreach (LineData line in LineCalc.createLines(27, 200, 270, -entity.Rot-90, pos)){
+                                someLines = false;
+                                Point[] t = new Point[2];
+                                Point start = new Point((int)line.StartX, (int)line.StartY);
+                                Point end = new Point((int)line.EndX, (int)line.EndY);
+                                t[0] = start;
+                                t[1] = end;
+                                Bgr c = new Bgr(255-34, 255 - 34, 255 - 34);
 
-                            foreach (Entity otherEntity in entitiesState)
-                            {
-                                if(otherEntity.Index != entity.Index)
+                                foreach (Entity otherEntity in entitiesState)
                                 {
-                                    int OxPos = width / 2 + (int)otherEntity.PosX - centerX;
-                                    int OyPos = height / 2 + (int)otherEntity.PosY - centerY;
-                                    double[] objPos = { OxPos, OyPos };
-                                    double[] lineStart = { line.StartX, line.StartY };
-                                    double[] lineEnd = { line.EndX, line.EndY };
-                                    double disToObj= LineCalc.distanceToObject(30, objPos, lineStart, lineEnd);
-                                    if (disToObj >= 0)
+                                    if(otherEntity.Index != entity.Index)
                                     {
-                                        c = new Bgr(255, 0, 0);
+                                        int OxPos = width / 2 + (int)otherEntity.PosX - centerX;
+                                        int OyPos = height / 2 + (int)otherEntity.PosY - centerY;
+                                        double[] objPos = { OxPos, OyPos };
+                                        double[] lineStart = { line.StartX, line.StartY };
+                                        double[] lineEnd = { line.EndX, line.EndY };
+                                        double disToObj= LineCalc.distanceToObject(30, objPos, lineStart, lineEnd);
+                                        if (disToObj >= 0)
+                                        {
+                                            if (ShowHittingLines.Checked) {
+                                                c = new Bgr(255, 0, 0);
+                                                someLines = true;
+                                            }
+                                        }
                                     }
                                 }
+                                if (ShowAllLines.Checked || someLines)
+                                    img1.DrawPolyline(t, false, c, 1);
                             }
-                            img1.DrawPolyline(t, false, c, 1);
                         }
                         
 
-                        size = new Size(20, 10);
+                        size = new Size(entity.Length, entity.Height);
                         rects = new RotatedRect(p, size, rotation);
-
-
-
                         img1.Draw(rects, new Bgr(0, 0, 0), -1);
 
+                        //Front half
+                        size = new Size(entity.Length/2, entity.Height);
+                        p.X = p.X + (int)(Math.Cos((Math.PI * rotation / 180))*entity.Length/4);
+                        p.Y = p.Y + (int)(Math.Sin((Math.PI * rotation / 180))*entity.Length/4);
+                        rects = new RotatedRect(p, size, rotation);
+                        CircleF rectsC = new CircleF(p, entity.Height / 2 - 1);
+                        if(ShowFrontC.Checked)
+                            img1.Draw(rectsC, new Bgr(25, 25, 100), -1);
+                        else if(ShowFrontR.Checked)
+                            img1.Draw(rects, new Bgr(25, 25, 100), -1);
 
 
-                        
+
+
                     }
 
 
@@ -214,6 +230,21 @@ namespace GraphicsInterface
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ShowFrontC_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ShowFrontR_CheckedChanged(object sender, EventArgs e)
         {
 
         }

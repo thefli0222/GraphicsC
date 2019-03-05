@@ -43,11 +43,22 @@
             this.button4 = new System.Windows.Forms.Button();
             this.EntitySelected = new System.Windows.Forms.ListBox();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.label3 = new System.Windows.Forms.Label();
+            this.ShowFrontR = new System.Windows.Forms.RadioButton();
+            this.ShowFrontC = new System.Windows.Forms.RadioButton();
+            this.ShowHittingLines = new System.Windows.Forms.CheckBox();
+            this.ShowAllLines = new System.Windows.Forms.CheckBox();
+            this.panel7 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.graphicsOutput)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // graphicsOutput
@@ -157,19 +168,17 @@
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.button4);
-            this.panel4.Controls.Add(this.EntitySelected);
             this.panel4.Controls.Add(this.panel2);
             this.panel4.Controls.Add(this.panel3);
             this.panel4.Controls.Add(this.panel1);
-            this.panel4.Location = new System.Drawing.Point(1040, 361);
+            this.panel4.Location = new System.Drawing.Point(1040, 220);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(433, 548);
             this.panel4.TabIndex = 7;
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(163, 116);
+            this.button4.Location = new System.Drawing.Point(39, 158);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(105, 39);
             this.button4.TabIndex = 8;
@@ -180,19 +189,111 @@
             // EntitySelected
             // 
             this.EntitySelected.FormattingEnabled = true;
-            this.EntitySelected.Location = new System.Drawing.Point(3, 116);
+            this.EntitySelected.Location = new System.Drawing.Point(3, 3);
             this.EntitySelected.Name = "EntitySelected";
-            this.EntitySelected.Size = new System.Drawing.Size(154, 160);
+            this.EntitySelected.Size = new System.Drawing.Size(169, 147);
             this.EntitySelected.TabIndex = 7;
             this.EntitySelected.SelectedIndexChanged += new System.EventHandler(this.EntitySelected_SelectedIndexChanged);
             // 
             // panel5
             // 
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Controls.Add(this.button4);
+            this.panel5.Controls.Add(this.panel6);
+            this.panel5.Controls.Add(this.EntitySelected);
             this.panel5.Location = new System.Drawing.Point(1040, 12);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(432, 336);
+            this.panel5.Size = new System.Drawing.Size(432, 202);
             this.panel5.TabIndex = 8;
+            // 
+            // panel6
+            // 
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel6.Controls.Add(this.panel7);
+            this.panel6.Controls.Add(this.ShowHittingLines);
+            this.panel6.Controls.Add(this.ShowAllLines);
+            this.panel6.Location = new System.Drawing.Point(178, 3);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(238, 194);
+            this.panel6.TabIndex = 10;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(4, 21);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(51, 17);
+            this.radioButton1.TabIndex = 15;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "None";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(1, 2);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(79, 13);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "Show Front As:";
+            // 
+            // ShowFrontR
+            // 
+            this.ShowFrontR.AutoSize = true;
+            this.ShowFrontR.Location = new System.Drawing.Point(4, 67);
+            this.ShowFrontR.Name = "ShowFrontR";
+            this.ShowFrontR.Size = new System.Drawing.Size(74, 17);
+            this.ShowFrontR.TabIndex = 13;
+            this.ShowFrontR.TabStop = true;
+            this.ShowFrontR.Text = "Rectangle";
+            this.ShowFrontR.UseVisualStyleBackColor = true;
+            this.ShowFrontR.CheckedChanged += new System.EventHandler(this.ShowFrontR_CheckedChanged);
+            // 
+            // ShowFrontC
+            // 
+            this.ShowFrontC.AutoSize = true;
+            this.ShowFrontC.Location = new System.Drawing.Point(4, 44);
+            this.ShowFrontC.Name = "ShowFrontC";
+            this.ShowFrontC.Size = new System.Drawing.Size(51, 17);
+            this.ShowFrontC.TabIndex = 12;
+            this.ShowFrontC.TabStop = true;
+            this.ShowFrontC.Text = "Circle";
+            this.ShowFrontC.UseVisualStyleBackColor = true;
+            this.ShowFrontC.CheckedChanged += new System.EventHandler(this.ShowFrontC_CheckedChanged);
+            // 
+            // ShowHittingLines
+            // 
+            this.ShowHittingLines.AutoSize = true;
+            this.ShowHittingLines.Location = new System.Drawing.Point(7, 26);
+            this.ShowHittingLines.Name = "ShowHittingLines";
+            this.ShowHittingLines.Size = new System.Drawing.Size(67, 17);
+            this.ShowHittingLines.TabIndex = 11;
+            this.ShowHittingLines.Text = "Hit Lines";
+            this.ShowHittingLines.UseVisualStyleBackColor = true;
+            // 
+            // ShowAllLines
+            // 
+            this.ShowAllLines.AutoSize = true;
+            this.ShowAllLines.Location = new System.Drawing.Point(7, 3);
+            this.ShowAllLines.Name = "ShowAllLines";
+            this.ShowAllLines.Size = new System.Drawing.Size(82, 17);
+            this.ShowAllLines.TabIndex = 10;
+            this.ShowAllLines.Text = "Vision Lines";
+            this.ShowAllLines.UseVisualStyleBackColor = true;
+            // 
+            // panel7
+            // 
+            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel7.Controls.Add(this.radioButton1);
+            this.panel7.Controls.Add(this.label3);
+            this.panel7.Controls.Add(this.ShowFrontR);
+            this.panel7.Controls.Add(this.ShowFrontC);
+            this.panel7.Location = new System.Drawing.Point(7, 49);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(88, 92);
+            this.panel7.TabIndex = 16;
             // 
             // Form1
             // 
@@ -211,6 +312,11 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -232,6 +338,14 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.ListBox EntitySelected;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.CheckBox ShowAllLines;
+        private System.Windows.Forms.CheckBox ShowHittingLines;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.RadioButton ShowFrontR;
+        private System.Windows.Forms.RadioButton ShowFrontC;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.Panel panel7;
     }
 }
 

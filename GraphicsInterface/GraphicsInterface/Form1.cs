@@ -30,8 +30,10 @@ namespace GraphicsInterface
         private int centerIndex;
         private Image<Bgr, Byte> img1;
         private int currentValue;
+        private int currentGen;
         private int value;
-     
+        private int genValue;
+
 
 
         public Form1()
@@ -48,7 +50,7 @@ namespace GraphicsInterface
             img1 = new Image<Bgr, Byte>(width, height, new Bgr(170, 225, 102));
             fpsThreadVar = new Thread(new ThreadStart(fpsThread));
             fpsThreadVar.Start();
-
+            currentGen = 0;
             entities = new Entities(text[0]);
             centerIndex = -1;
 
@@ -90,8 +92,13 @@ namespace GraphicsInterface
                     currentValue++;
                     value = currentValue;
 
-                    if (currentValue > 7000)
+
+
+                    if (currentValue > 998) {
                         currentValue = 0;
+                        currentGen++;
+                        genValue = currentGen;
+                    }
 
                     Point p = new Point(0, 0);
                     Size size = new Size(2000, 2000);
@@ -101,7 +108,7 @@ namespace GraphicsInterface
 
                     
 
-                    entities.updateWithTick(fullData.getTickInfo(0, currentValue));
+                    entities.updateWithTick(fullData.getTickInfo(currentGen, currentValue));
                     entitiesState = entities.getEntities();
 
                     foreach (Entity entity in entitiesState)
@@ -153,7 +160,10 @@ namespace GraphicsInterface
 
                         size = new Size(entity.Length, entity.Height);
                         rects = new RotatedRect(p, size, rotation);
-                        img1.Draw(rects, new Bgr(0, 0, 0), -1);
+                        if(Enum.GetName(typeof(AnimalNames), entity.Animal - 1) == "Wolf")
+                            img1.Draw(rects, new Bgr(25, 57, 50), -1);
+                        else if(Enum.GetName(typeof(AnimalNames), entity.Animal - 1) == "Sheep")
+                            img1.Draw(rects, new Bgr(91, 162, 193), -1);
 
                         //Front half
                         size = new Size(entity.Length/2, entity.Height);
@@ -178,6 +188,7 @@ namespace GraphicsInterface
                 else
                 {
                     currentValue = 0;
+                    currentGen = 0;
                     System.Threading.Thread.Sleep(500);
                 }
             }
@@ -194,7 +205,10 @@ namespace GraphicsInterface
         {
             string theText = textBox2.Text;
             value = Int32.Parse(theText);
+            theText = textBox1.Text;
+            genValue = Int32.Parse(theText);
             currentValue = value;
+            currentGen = genValue;
             isPlaying = true;
         }
 
@@ -213,6 +227,7 @@ namespace GraphicsInterface
         private void tickUpdate()
         {
              textBox2.Text = "" + currentValue;
+             textBox1.Text = "" + currentGen;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -221,6 +236,9 @@ namespace GraphicsInterface
             value = Int32.Parse(theText);
             currentValue = value;
 
+            theText = textBox1.Text;
+            genValue = Int32.Parse(theText);
+            currentGen = genValue;
             isPlaying = true;
         }
 

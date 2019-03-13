@@ -65,9 +65,9 @@ namespace GraphicsInterface
             string[] posValues = changeValues[1].Split(',');
             if(int.Parse(changeValues[0]) == Index)
             {
-                //posValues[0] = posValues[0].Replace('.', ',');
-                //posValues[1] = posValues[1].Replace('.', ',');
-                //changeValues[2] = changeValues[2].Replace('.', ',');
+                posValues[0] = posValues[0].Replace('.', ',');
+                posValues[1] = posValues[1].Replace('.', ',');
+                changeValues[2] = changeValues[2].Replace('.', ',');
 
                 PosX = float.Parse(posValues[0]);
                 PosY = float.Parse(posValues[1]);

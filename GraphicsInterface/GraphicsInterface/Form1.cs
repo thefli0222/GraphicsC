@@ -34,6 +34,11 @@ namespace GraphicsInterface
         private int value;
         private int genValue;
 
+        private static int bottomLimit = 0;
+        private static int topLimit = 1000;
+        private static int leftLimit = 0;
+        private static int rightLimit = 1000;
+
 
 
         public Form1()
@@ -43,7 +48,7 @@ namespace GraphicsInterface
             centerX = width/2;
             centerY = height/2;
             InitializeComponent();
-            StreamReader sr = File.OpenText("C:/Users/Johannes/Desktop/AI proj/DIT411/notgrid/gridless/output.txt");
+            StreamReader sr = File.OpenText("C:/Users/fredr/Documents/GitHub/GraphicsC/GraphicsInterface/GraphicsInterface/output.txt");
             //C:/Users/fredr/Documents/GitHub/GraphicsC/GraphicsInterface/GraphicsInterface
             //C:/Users/Johannes/Desktop/AI proj/DIT411/notgrid/gridless/
             string[] text = sr.ReadToEnd().Split('B');
@@ -107,7 +112,28 @@ namespace GraphicsInterface
                     img1.Draw(rects, new Bgr(170, 225, 102), -1);
 
 
-                    
+                    int bL = height / 2 + bottomLimit - centerY;
+                    int tL = height / 2 + topLimit - centerY;
+                    int rL = width / 2 + rightLimit - centerX;
+                    int lL = width / 2 + leftLimit - centerX;
+                    Point[] mapPoints = new Point[8];
+                    //Bottom Line
+                    mapPoints[0] = new Point(rL, bL);
+                    mapPoints[1] = new Point(lL, bL);
+                    //Top Line
+                    mapPoints[2] = new Point(rL, tL);
+                    mapPoints[3] = new Point(lL, tL);
+                    //Right Line
+                    mapPoints[4] = new Point(rL, bL);
+                    mapPoints[5] = new Point(rL, tL);
+                    //Left Line
+                    mapPoints[6] = new Point(lL, bL);
+                    mapPoints[7] = new Point(lL, tL);
+
+                    img1.DrawPolyline(mapPoints, false, new Bgr(255, 255, 255), 1);
+
+
+
 
                     entities.updateWithTick(fullData.getTickInfo(currentGen, currentValue));
                     entitiesState = entities.getEntities();

@@ -44,7 +44,7 @@ namespace GraphicsInterface
         public Form1()
         {
             width = 1000;
-            height = 900;
+            height = 1000;
             centerX = width/2;
             centerY = height/2;
             InitializeComponent();

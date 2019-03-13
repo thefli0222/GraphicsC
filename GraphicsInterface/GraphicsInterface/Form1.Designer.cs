@@ -44,13 +44,13 @@
             this.EntitySelected = new System.Windows.Forms.ListBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
             this.ShowFrontR = new System.Windows.Forms.RadioButton();
             this.ShowFrontC = new System.Windows.Forms.RadioButton();
             this.ShowHittingLines = new System.Windows.Forms.CheckBox();
             this.ShowAllLines = new System.Windows.Forms.CheckBox();
-            this.panel7 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.graphicsOutput)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -66,7 +66,7 @@
             this.graphicsOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.graphicsOutput.Location = new System.Drawing.Point(12, 12);
             this.graphicsOutput.Name = "graphicsOutput";
-            this.graphicsOutput.Size = new System.Drawing.Size(1000, 900);
+            this.graphicsOutput.Size = new System.Drawing.Size(1000, 1000);
             this.graphicsOutput.TabIndex = 0;
             this.graphicsOutput.TabStop = false;
             this.graphicsOutput.Click += new System.EventHandler(this.graphicsOutput_Click);
@@ -217,6 +217,18 @@
             this.panel6.Size = new System.Drawing.Size(238, 194);
             this.panel6.TabIndex = 10;
             // 
+            // panel7
+            // 
+            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel7.Controls.Add(this.radioButton1);
+            this.panel7.Controls.Add(this.label3);
+            this.panel7.Controls.Add(this.ShowFrontR);
+            this.panel7.Controls.Add(this.ShowFrontC);
+            this.panel7.Location = new System.Drawing.Point(7, 49);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(88, 92);
+            this.panel7.TabIndex = 16;
+            // 
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
@@ -283,23 +295,11 @@
             this.ShowAllLines.Text = "Vision Lines";
             this.ShowAllLines.UseVisualStyleBackColor = true;
             // 
-            // panel7
-            // 
-            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel7.Controls.Add(this.radioButton1);
-            this.panel7.Controls.Add(this.label3);
-            this.panel7.Controls.Add(this.ShowFrontR);
-            this.panel7.Controls.Add(this.ShowFrontC);
-            this.panel7.Location = new System.Drawing.Point(7, 49);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(88, 92);
-            this.panel7.TabIndex = 16;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1484, 921);
+            this.ClientSize = new System.Drawing.Size(1484, 1022);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.graphicsOutput);

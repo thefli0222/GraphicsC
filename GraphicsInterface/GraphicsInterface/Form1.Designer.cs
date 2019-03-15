@@ -40,6 +40,7 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.EntitySelected = new System.Windows.Forms.ListBox();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -51,6 +52,8 @@
             this.ShowFrontC = new System.Windows.Forms.RadioButton();
             this.ShowHittingLines = new System.Windows.Forms.CheckBox();
             this.ShowAllLines = new System.Windows.Forms.CheckBox();
+            this.catchList = new System.Windows.Forms.ListBox();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.graphicsOutput)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -168,6 +171,9 @@
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.label5);
+            this.panel4.Controls.Add(this.catchList);
+            this.panel4.Controls.Add(this.label4);
             this.panel4.Controls.Add(this.panel2);
             this.panel4.Controls.Add(this.panel3);
             this.panel4.Controls.Add(this.panel1);
@@ -175,6 +181,16 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(433, 548);
             this.panel4.TabIndex = 7;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.35F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(3, 113);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(105, 15);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Num of catches: 0";
             // 
             // button4
             // 
@@ -295,6 +311,24 @@
             this.ShowAllLines.Text = "Vision Lines";
             this.ShowAllLines.UseVisualStyleBackColor = true;
             // 
+            // catchList
+            // 
+            this.catchList.FormattingEnabled = true;
+            this.catchList.Location = new System.Drawing.Point(208, 113);
+            this.catchList.Name = "catchList";
+            this.catchList.Size = new System.Drawing.Size(171, 160);
+            this.catchList.TabIndex = 8;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.35F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(3, 138);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(78, 15);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "CR Total: 0%";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -312,6 +346,7 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
@@ -346,6 +381,9 @@
         private System.Windows.Forms.RadioButton ShowFrontC;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ListBox catchList;
     }
 }
 

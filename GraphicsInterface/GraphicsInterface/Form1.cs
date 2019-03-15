@@ -18,6 +18,7 @@ using System.Collections;
 namespace GraphicsInterface
 {
     public enum AnimalNames {Wolf, Sheep};
+
     public partial class Form1 : Form
     {
         private Data fullData;
@@ -33,11 +34,17 @@ namespace GraphicsInterface
         private int currentGen;
         private int value;
         private int genValue;
+        private int numEaten;
+        private string test;
+        private bool catched;
+        private int catchValue;
+        private int catchGen;
 
         private static int bottomLimit = 0;
         private static int topLimit = 1000;
         private static int leftLimit = 0;
         private static int rightLimit = 1000;
+        delegate void SetTextCallback(string text);
 
 
 
@@ -48,11 +55,12 @@ namespace GraphicsInterface
             centerX = width/2;
             centerY = height/2;
             InitializeComponent();
+            catched = false;
             StreamReader sr = File.OpenText("C:/Users/fredr/Documents/GitHub/GraphicsC/GraphicsInterface/GraphicsInterface/output.txt");
             //C:/Users/fredr/Documents/GitHub/GraphicsC/GraphicsInterface/GraphicsInterface
             //C:/Users/Johannes/Desktop/AI proj/DIT411/notgrid/gridless/
             string[] text = sr.ReadToEnd().Split('B');
-
+            numEaten = 0;
             img1 = new Image<Bgr, Byte>(width, height, new Bgr(170, 225, 102));
             fpsThreadVar = new Thread(new ThreadStart(fpsThread));
             fpsThreadVar.Start();
@@ -100,11 +108,11 @@ namespace GraphicsInterface
 
 
 
-                    if (currentValue > 998) {
+                    /*if (currentValue > 448) {
                         currentValue = 0;
                         currentGen++;
                         genValue = currentGen;
-                    }
+                    }*/
 
                     Point p = new Point(0, 0);
                     Size size = new Size(2000, 2000);
@@ -131,11 +139,27 @@ namespace GraphicsInterface
                     mapPoints[7] = new Point(lL, tL);
 
                     img1.DrawPolyline(mapPoints, false, new Bgr(255, 255, 255), 1);
+                    
 
 
-
-
-                    entities.updateWithTick(fullData.getTickInfo(currentGen, currentValue));
+                    try { 
+                        entities.updateWithTick(fullData.getTickInfo(currentGen, currentValue));
+                    } catch
+                    {
+                        entities.updateWithTick(fullData.getTickInfo(currentGen, currentValue - 1));
+                        catchValue = currentValue-1;
+                        catchGen = currentGen;
+                        currentValue = 0;
+                        currentGen++;
+                        genValue = currentGen;
+                        if(catchValue < 500) {
+                            numEaten++;
+                            catched = true;
+                            button2_Click(null, null);
+                        } else { 
+                            tickUpdate();
+                        }
+                    }
                     entitiesState = entities.getEntities();
 
                     foreach (Entity entity in entitiesState)
@@ -210,6 +234,9 @@ namespace GraphicsInterface
 
 
                     graphicsOutput.Image = img1.Bitmap;
+                    //EntitySelected.Items.Add("Num of catches:" + numEaten);
+
+                    //label4.Text = "Num of catches:" + numEaten;
                     System.Threading.Thread.Sleep(15);
                 }
                 else
@@ -253,8 +280,12 @@ namespace GraphicsInterface
 
         private void tickUpdate()
         {
-             textBox2.Text = "" + currentValue;
-             textBox1.Text = "" + currentGen;
+            ThreadHelperClass.SetText(this, textBox2, "" + currentValue);
+            ThreadHelperClass.SetText(this, textBox1, "" + currentGen);
+            ThreadHelperClass.SetText(this, label4, "Num of catches: " + numEaten);
+            ThreadHelperClass.SetText(this, label5, "CR Total: " + ((numEaten*100)/(currentGen*100)) +"%");
+            ThreadHelperClass.AddText(this, catchList, "Gen: " + catchGen + " Tick: " + catchValue + " Catch: " + catched);
+            catched = false;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -306,6 +337,48 @@ namespace GraphicsInterface
                 centerIndex = int.Parse(text.Split(':')[0]) - 1;
             else
                 centerIndex = -1;  
+        }
+    }
+
+    public static class ThreadHelperClass
+    {
+        delegate void SetTextCallback(Form f, Control ctrl, string text);
+        /// <summary>
+        /// Set text property of various controls
+        /// </summary>
+        /// <param name="form">The calling form</param>
+        /// <param name="ctrl"></param>
+        /// <param name="text"></param>
+        public static void SetText(Form form, Control ctrl, string text)
+        {
+            // InvokeRequired required compares the thread ID of the 
+            // calling thread to the thread ID of the creating thread. 
+            // If these threads are different, it returns true. 
+            if (ctrl.InvokeRequired)
+            {
+                SetTextCallback d = new SetTextCallback(SetText);
+                form.Invoke(d, new object[] { form, ctrl, text });
+            }
+            else
+            {
+                ctrl.Text = text;
+            }
+        }
+
+        public static void AddText(Form form, Control ctrl, string text)
+        {
+            // InvokeRequired required compares the thread ID of the 
+            // calling thread to the thread ID of the creating thread. 
+            // If these threads are different, it returns true. 
+            if (ctrl.InvokeRequired)
+            {
+                SetTextCallback d = new SetTextCallback(AddText);
+                form.Invoke(d, new object[] { form, ctrl, text });
+            }
+            else
+            {
+                ((ListBox)ctrl).Items.Add(text);
+            }
         }
     }
 }

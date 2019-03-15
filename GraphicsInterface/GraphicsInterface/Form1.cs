@@ -155,7 +155,7 @@ namespace GraphicsInterface
                         if(catchValue < 500) {
                             numEaten++;
                             catched = true;
-                            button2_Click(null, null);
+                            tickUpdate();
                         } else { 
                             tickUpdate();
                         }
